@@ -23,7 +23,7 @@ test('live offer safety permits only one active sent offer at a time for a rule'
   assert.match(source, /function canSendNextOffer/);
   assert.match(source, /status='OFFER_SENT'/);
   assert.match(source, /activeOfferCount/);
-  assert.match(source, /activeOfferCount\s*>?=\s*remaining/);
+  assert.match(source, /activeOfferCount\s*>?=\s*1/);
 });
 
 test('accepted offer increments progress and disables rule at target quantity', () => {
