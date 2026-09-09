@@ -1,10 +1,10 @@
 {
   "name": "ebay-offer-bot-mobile",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server-v5.js",
+    "start": "node runtime-patch.js && node server-v5-runtime.js",
     "test": "node --test tests/*.test.js"
   },
   "dependencies": {
