@@ -29,3 +29,10 @@ test('rules can be edited in UI and API', () => {
   assert.match(source, /UPDATE rules SET/);
   assert.match(source, /Зберегти/);
 });
+
+test('rule action buttons are rendered without broken escaped quotes', () => {
+  assert.match(source, /run\(&quot;/);
+  assert.match(source, /editRule\(&quot;/);
+  assert.match(source, /deleteRule\(&quot;/);
+  assert.doesNotMatch(source, /run\(\\\\''/);
+});
