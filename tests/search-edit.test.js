@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const source = readFileSync(new URL('../server-v4.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../server-v5.js', import.meta.url), 'utf8');
 
 test('search uses keywords plus size but does not require them literally in title after Browse search', () => {
   assert.match(source, /rule\.searchKeywords.*rule\.sizeVariant/s);
@@ -19,7 +19,7 @@ test('run response includes search diagnostics', () => {
 
 test('rules can be edited in UI and API', () => {
   assert.match(source, /Редагувати/);
-  assert.match(source, /PUT/);
+  assert.match(source, /method:'PUT'/);
   assert.match(source, /\/api\/rules\//);
   assert.match(source, /Зберегти/);
 });
