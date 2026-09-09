@@ -7,5 +7,8 @@
     "start": "node server-v5.js",
     "test": "node --test tests/*.test.js"
   },
+  "dependencies": {
+    "pg": "^8.16.3"
+  },
   "engines": {"node": ">=22.5.0"}
 }
