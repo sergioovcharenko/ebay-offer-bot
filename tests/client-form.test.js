@@ -21,3 +21,23 @@ test('successful rule creation clears the rule form', () => {
   assert.match(source, /function resetRuleForm\(\)/);
   assert.match(source, /resetRuleForm\(\);await load\(\)/);
 });
+
+test('rules can be deleted from UI and API', () => {
+  assert.match(source, /async function deleteRule\(id\)/);
+  assert.match(source, /method:'DELETE'/);
+  assert.match(source, /\/api\/rules\//);
+  assert.match(source, /Видалити/);
+});
+
+test('notification setup has a direct helper button and instructions', () => {
+  assert.match(source, /Підключити сповіщення/);
+  assert.match(source, /ntfy/);
+  assert.match(source, /notifyTopic/);
+});
+
+test('UI supports persisted light and dark iOS-style themes', () => {
+  assert.match(source, /data-theme/);
+  assert.match(source, /localStorage\.setItem\(['"]theme['"]/);
+  assert.match(source, /toggleTheme/);
+  assert.match(source, /prefers-color-scheme/);
+});
