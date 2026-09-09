@@ -101,7 +101,7 @@ const server=http.createServer(async(req,res)=>{try{const u=new URL(req.url,'htt
   if(p==='/'&&req.method==='GET'){res.writeHead(200,{'content-type':'text/html; charset=utf-8'});return res.end(HTML)}
   if(p==='/manifest.webmanifest'){res.writeHead(200,{'content-type':'application/manifest+json'});return res.end(JSON.stringify(manifest))}
   if(p==='/sw.js'){res.writeHead(200,{'content-type':'text/javascript'});return res.end(sw)}
-  if(p==='/api/health')return json(res,200,{ok:true,provider:PROVIDER,dryRun:DRY_RUN});
+  if((p==='/health'||p==='/api/health')&&req.method==='GET')return json(res,200,{ok:true,provider:PROVIDER,dryRun:DRY_RUN});
   if(p==='/api/settings'&&req.method==='GET')return json(res,200,{provider:PROVIDER,dryRun:DRY_RUN,ebayConfigured:Boolean(EBAY_CLIENT_ID&&EBAY_CLIENT_SECRET),notifications:db.settings});
   if(p==='/api/rules'&&req.method==='GET')return json(res,200,db.rules);
   if(p==='/api/rules'&&req.method==='POST'){const r=validateRule(await body(req));db.rules.unshift(r);save();log('RULE_CREATED',r.name,{ruleId:r.id});return json(res,201,r)}
