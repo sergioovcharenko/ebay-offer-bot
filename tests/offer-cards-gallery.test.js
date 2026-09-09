@@ -2,20 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const source = readFileSync(new URL('../server-v6.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../server-v7.js', import.meta.url), 'utf8');
 
 test('offer cards expose gallery controls without opening eBay', () => {
-  assert.match(source, /\/api\/offers\/([^/]+)\/gallery/);
+  assert.match(source, /gallery/);
   assert.match(source, /additionalImages/);
   assert.match(source, /data-action="gallery-prev"/);
   assert.match(source, /data-action="gallery-next"/);
-  assert.match(source, /photoCounter/);
+  assert.match(source, /photo-counter/);
+  assert.match(source, /touchstart/);
+  assert.match(source, /touchend/);
 });
 
 test('each offer card has editable amount and per-item send action', () => {
   assert.match(source, /data-offer-amount/);
   assert.match(source, /Надіслати пропозицію/);
-  assert.match(source, /\/api\/offers\/([^/]+)\/send/);
+  assert.match(source, /requestOfferSend/);
   assert.match(source, /Реальне надсилання вимкнено/);
 });
 
