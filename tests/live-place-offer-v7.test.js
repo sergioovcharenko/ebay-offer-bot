@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const source = readFileSync(new URL('../server-v7.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../run-v7-live.mjs', import.meta.url), 'utf8');
 
 test('manual offer amount is not capped by the rule maximum', () => {
   assert.doesNotMatch(source, /value>rule\.maxOfferAmount/);
@@ -21,7 +21,7 @@ test('PlaceOffer uses the authenticated buyer OAuth token and Best Offer action'
 
 test('REST item ids are converted to legacy listing and variation ids', () => {
   assert.match(source, /function parseRestItemId\(/);
-  assert.match(source, /v1\|/);
+  assert.match(source, /v1\\\|/);
   assert.match(source, /legacyItemId/);
   assert.match(source, /variationId/);
 });
